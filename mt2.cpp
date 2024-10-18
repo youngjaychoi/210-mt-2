@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -53,28 +57,28 @@ public:
         temp->next = newNode;
     }
 
-    void delete_val(int value) {
-        if (!head) return;
+    // void delete_val(int value) {
+    //     if (!head) return;
 
-        Node* temp = head;
+    //     Node* temp = head;
         
-        while (temp && temp->data != value)
-            temp = temp->next;
+    //     while (temp && temp->data != value)
+    //         temp = temp->next;
 
-        if (!temp) return; 
+    //     if (!temp) return; 
 
-        if (temp->prev)
-            temp->prev->next = temp->next;
-        else
-            head = temp->next; 
+    //     if (temp->prev)
+    //         temp->prev->next = temp->next;
+    //     else
+    //         head = temp->next; 
 
-        if (temp->next)
-            temp->next->prev = temp->prev;
-        else
-            tail = temp->prev; 
+    //     if (temp->next)
+    //         temp->next->prev = temp->prev;
+    //     else
+    //         tail = temp->prev; 
 
-        delete temp;
-    }
+    //     delete temp;
+    // }
 
     void delete_pos(int pos) {
         if (!head) {
@@ -169,6 +173,17 @@ public:
         delete temp;
     }
 
+    int size() {
+        int count = 0;
+
+        Node* current = head;
+        while (current) {
+            count++;
+            current = current->next;
+        }
+        return count;
+    }
+
     ~DoublyLinkedList() {
         while (head) {
             Node* temp = head;
@@ -176,6 +191,7 @@ public:
             delete temp;
         }
     }
+
     void print() {
         Node* current = head;
         if (!current) {
@@ -206,6 +222,8 @@ public:
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
+    DoublyLinkedList coffee;
+    vector<string> name = file("C:/code/names.txt");
     
     return 0;
 }
