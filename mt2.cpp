@@ -26,36 +26,36 @@ private:
 public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void insert_after(int value, int position) {
-        if (position < 0) {
-            cout << "Position must be >= 0." << endl;
-            return;
-        }
+    // void insert_after(int value, int position) {
+    //     if (position < 0) {
+    //         cout << "Position must be >= 0." << endl;
+    //         return;
+    //     }
 
-        Node* newNode = new Node(value);
-        if (!head) {
-            head = tail = newNode;
-            return;
-        }
+    //     Node* newNode = new Node(value);
+    //     if (!head) {
+    //         head = tail = newNode;
+    //         return;
+    //     }
 
-        Node* temp = head;
-        for (int i = 0; i < position && temp; ++i)
-            temp = temp->next;
+    //     Node* temp = head;
+    //     for (int i = 0; i < position && temp; ++i)
+    //         temp = temp->next;
 
-        if (!temp) {
-            cout << "Position exceeds list size. Node not inserted.\n";
-            delete newNode;
-            return;
-        }
+    //     if (!temp) {
+    //         cout << "Position exceeds list size. Node not inserted.\n";
+    //         delete newNode;
+    //         return;
+    //     }
 
-        newNode->next = temp->next;
-        newNode->prev = temp;
-        if (temp->next)
-            temp->next->prev = newNode;
-        else
-            tail = newNode;
-        temp->next = newNode;
-    }
+    //     newNode->next = temp->next;
+    //     newNode->prev = temp;
+    //     if (temp->next)
+    //         temp->next->prev = newNode;
+    //     else
+    //         tail = newNode;
+    //     temp->next = newNode;
+    // }
 
     // void delete_val(int value) {
     //     if (!head) return;
@@ -106,14 +106,13 @@ public:
             return;
         }
     
-        if (!temp->next) {
-            pop_back();
-            return;
+        if (temp->next) {
+            temp->next->prev = temp->prev;
+        }
+        if (temp->prev) {
+            temp->prev->next = temp->next;
         }
     
-        Node* tempPrev = temp->prev;
-        tempPrev->next = temp->next;
-        temp->next->prev = tempPrev;
         delete temp;
     }
 
@@ -205,25 +204,44 @@ public:
         cout << endl;
     }
 
-    void print_reverse() {
-        Node* current = tail;
-        if (!current) { 
-            cout << "List is empty." << endl;
-            return;
-        }
-        while (current) {
-            cout << current->data << " ";
-            current = current->prev;
-        }
-        cout << endl;
-    }
+    // void print_reverse() {
+    //     Node* current = tail;
+    //     if (!current) { 
+    //         cout << "List is empty." << endl;
+    //         return;
+    //     }
+    //     while (current) {
+    //         cout << current->data << " ";
+    //         current = current->prev;
+    //     }
+    //     cout << endl;
+    // }
 };
+
+vector<string> readName(const string &inFile);
+int setRandom (int min, int max);
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList coffee;
-    vector<string> name = file("C:/code/names.txt");
+    vector<string> name = readName("C:/code/names.txt");
     
     return 0;
+}
+
+vector<string> readName(const string &inFile) {
+    vector<string> names;
+    ifstream file(inFile);
+    string name;
+
+    while (file >> name) {
+        names.push_back(name);
+    }
+
+    return names;
+}
+
+int setRandom (int min, int max) {
+    return rand() % (max - min + 1) + min;
 }
