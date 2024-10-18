@@ -219,7 +219,8 @@ public:
 };
 
 vector<string> readName(const string &inFile);
-int setRandom (int min, int max);
+int setRandom(int min, int max);
+void simulation(DoublyLinkedList &line, vector<string> &names);
 
 int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
@@ -244,4 +245,26 @@ vector<string> readName(const string &inFile) {
 
 int setRandom (int min, int max) {
     return rand() % (max - min + 1) + min;
+}
+
+void simulation(DoublyLinkedList &line, vector<string> &names) {
+    srand(time(0));
+    int time = 20;
+
+    for (int i = 0; i < 5; ++i) {
+        string name = names[setRandom(0, names.size() - 1)];
+        line.push_back(i);
+        cout << "    " << name << " joins the line" << endl;
+    }
+
+    for (int j = 1; j < time; ++j) {
+        cout << "Time step #" << time << ":" << endl;
+
+        if (setRandom(1, 100) <= 40)
+        if (setRandom(1, 100) <= 60)
+        if (setRandom(1, 100) <= 20)
+        if (setRandom(1, 100) <= 10)
+        if (setRandom(1, 100) <= 10)
+    }
+    
 }
