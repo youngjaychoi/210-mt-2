@@ -226,10 +226,8 @@ int main() {
     cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
 
     DoublyLinkedList coffee;
-    vector<string> names = readName("C:/code/names.txt");
+    vector<string> name = readName("C:/code/names.txt");
     
-    simulation(coffee, names);
-
     return 0;
 }
 
@@ -264,29 +262,19 @@ void simulation(DoublyLinkedList &line, vector<string> &names) {
 
         if (setRandom(1, 100) <= 40) {
             line.pop_front();
-            cout << "First customer is served" << endl;
+            cout << "First customer is served." << endl;
         }
         if (setRandom(1, 100) <= 60) {
-            string name = names[setRandom(0, names.size() - 1)];
+            string name = names[setRandom(0, names.size - 1)];
             line.push_back(name.length());
-            cout << name << " joined the line" << endl;
+            cout << name << "" << endl;
         }
         if (setRandom(1, 100) <= 20) {
             line.pop_back();
-            cout << "The last customer left the line" << endl;
+            cout << "The last customer left the line." << endl;
         }
-        if (setRandom(1, 100) <= 10) {
-            int leave = setRandom(1, line.size());
-            cout << "A random customer leaves the line" << endl;
-            line.delete_pos(leave);
-        }
-        if (setRandom(1, 100) <= 10) {
-            string name = names[setRandom(0, names.size() - 1)];
-            cout << name << " (VIP) joins the front of the line" << endl;
-            line.push_front(name.length());
-        }
-
-        cout << "Current line: " << endl;
-        line.print();
+        if (setRandom(1, 100) <= 10)
+        if (setRandom(1, 100) <= 10)
     }
+    
 }
